@@ -1,0 +1,110 @@
+﻿Modules is a small program that performs actions on a local machine, application programming interface (API), or remote host. 
+
+Types of Modules: - System > user , Group, Hostname, iptables, Lvg, Lvol, Make, Mount, Ping, Timezone, Systemd, Service
+
+                  - Commands > Command, Expect, Raw, Script, Shell
+                  
+                  - Cloud > Amazon, Atomic, Axure, Centrylink, Cloudscale, Cloudstack, Digital ocean, Docker, Google, Linse, Openstack, Rackspace, Smartos, Softlayer, VM ware.
+                  
+                  - Windows > Win_copy, Win_command, Win_domain., Win_file, Win_iis_website, Win_msg, Win_msi, Win_package, Win_ping, Win_path, Win_robocopy, Win_regedit, Win_shell, Win_service, Win_user
+                  
+                  - Fils
+                  
+                  - Database
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  EXPLAINATIONS:-
+                  
+                  - 
+                    name: play 1
+                    hosts: localhost
+                    tasks:
+                      - name: Execute commmand 'date'
+                        command: date
+                        
+                      - name: Display resolv.conf contents
+                        command: cat /etc/resolv.conf
+                        
+                      - name: Display resolv.conf content but first change directory
+                      command: cat resolv.conf chdir=/etc  # this chdir will change directory.
+                      					     # =/etc means, change directory to /etc before execute the cat command.
+                      					     
+                      					     
+                      					     
+                # "create" is use to create a folder if this folder is not existing. if already existing then it will not create folder.
+                  
+                      - name Display resolv.conf contents
+                        command: mkdir /folder create=/folder
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                       2. SCRIPT MODULE
+                       
+                         - Use to run a script on a 1000 servers for run tasks like installing software, run a cron tab, patching , update etc . It's like ssm manager's run command.
+                         
+                         - if you want to run a script on a 1000 servers. you have to upload this script by ansible. 
+                         - ansible will copy this script within all 1000 servers and EXECUTE scipt on all servers.
+                         
+                         
+                         
+                       3. SERVICE MODULE
+                       
+                         - Use to maintain services on a system such as Starting, Stop, Restart the various services in a particulat order.
+                         
+                         Ex. start nginx, mysql etc > systemctl start nginx in linux.
+                         
+                         -                                                                  -
+                           name: Start services in order								   hosts: all								  
+                           tasks:								  
+                             - name: Start the database service                                  
+                               service: name=postgersql state=present                              
+                                								         
+                             - name: Start the NGINX Service 				                         service: name=ngix state=persent
+                               
+                                                                                        
+                               
+       3. lineinfile MODULE
+                             
+      - Use to search a line in a file and ADD/REMOVE or REPLACE it. if that line is not exitsting , then it will be add of if already existing , it can be replace.
+                               
+                             EX.  /etc/resolv.conf --
+                                  
+                                  nameserver 10.1.250.1
+                                  nameserver 10.1.250.2
+                                  
+                                  
+                                  
+                                  playbook.yml
+                                  
+                                  -
+                                    name: Add DNS Server to resolv.conf
+                                    hosts: localhost
+                                    tasks:
+                                      - lineinfile:
+                                          path: /etc/resolv.conf
+                                          line: 'nameserver 10.1.250.10'
+                                          
+                                          
+                                          
+      THIS THING IF WE PERFORM BY echo "nameserver 10.1.250.10" >> apend to resolv.conf
+                                
+      It will do entry or add this line at every time which is not desirable,
+                                
+      If we do by lineinfile MODULE -- It will do Entry or add a line if it is not  existing.                             								         
+                                
+                                
+                                
+                                
+                               
+                               
+                               
+                               

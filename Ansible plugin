@@ -1,0 +1,30 @@
+
+NOTE:- Plugin is use for do configuration at control plan (Master Node)EC2. Execute on the control node within the /usr/bin/ansible process.
+       Module is use for do configuration at target system (usually that means on a remote system) in separate processes.
+
+You have infrastructure, and resources are VPC, Load Balancer, EC2, Security Group, WAF, AWS Shield, Database, EFS, FSX, CloudTrail etc.
+You have to manage this resources like creating, deleting, store data in S3, Configure Security Group and Peering Connection etc.
+
+This is called Provisoning.
+
+If you want to Provision and cusotm configuration this resources automated. Use Ansible Plugin.
+
+What is Plugin ?
+
+DYNAMIC PLUGIN:- You can fetch real-time informations direclty from your cloud provider AWS
+
+MODULE PLUGIN:- Allowing you to create a EC2 with specific AMI Versions, Instace Type, Security Group
+
+ACTION PLUGIN:- It Simplify the load balancer management.
+		 You can make easily Load Balancer rule, Health Check, SSL Certificates.
+		 
+Lookup Plugin:- It fetch data from external sources like Databases.
+
+Filter Plugin:- Allows you to format and various output.
+
+Connnection Plugin:- Allows ansible to connect and communicate with various Target Systems like SSH, WinRM, Docker.
+
+Dynamic Inventory Plugin:- Allow ansible to retrive real time data from your infrastructure.
+			    Ex.You are tasked with setting up an Ansible playbook that automates the deployment of applications on AWS ec2 instances. Before running the playbook, you need to ensure that Ansible has an up-to-date inventory of all ec2 instances in your AWS account.
+			    
+			    
