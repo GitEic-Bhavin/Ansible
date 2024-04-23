@@ -1,0 +1,17 @@
+﻿What is YAML ?
+yet another markup language or YAML ain't markup language.
+
+Start your YAML file with always --- ,
+If you have to define tasks, one by one then task should be indicate by “ - ” is called array/list.
+
+You have 4 tasks  means 4 is lists of 4 tasks. 
+List is defined by “ - ”
+
+---
+- name: “create a direactory”	# name is a list/task name
+   hosts: all				# hosts= remote server, all = all server in host file
+   become: yes   # ansible take premission of root as sudo to perform a tasks on server
+   tasks:    # It is a key & have a tasks as dctionary.
+     Path: ./basic-http-server
+     stae: dictionary
+   

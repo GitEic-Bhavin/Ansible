@@ -1,0 +1,36 @@
+Ansible configuration file
+
+when you install ansible conifg file - It's default path is - /etc/ansible/ansible.cfg
+
+ansible configuration file is ansibel.cfg
+
+ansible.cfg is devided into 7 parts 1.[defaults], 2.[iventory], 3.[privilege_escalation], 4.[paramiko_connectino],  
+				     5.[ssh_connection], 6.[persistent_connection], 7. [colors]
+				     
+				     > Each parts/file have key & value pair Ex., Inventory = /etc/ansible/hosts , loation of inventory file is /etc/ansible/hosts.
+				     
+				     
+				     
+				     
+	- You have 3 playbooks web, database, network playbook.
+	- Your requirement is while i run web-playbooks - I do not want facts to be gathered.
+			       while i run database-playbooks - I do want facts to be gathered, but i do not want to display colored output for some reason.
+			       But, while i run network-playbook - I want to extend the ssh timeout to 20 seconds instead of default 10 seconds.
+			       
+			       
+			       
+			     - You have 3 files web, database, network.
+			     - In each files you want to change - You have to copy default ansible.cfg into these 3 files directory.
+			     - Ex. web-playbooks/ansible.cfg, database-playbooks/ansible.cfg, network-playbooks/ansible.cfg.
+			     
+			     - Next time you run ansible , it pick values from the ansible.cfg file
+			     
+			     
+			     
+			     
+			     
+			     
+			     
+			     
+		- You want to store web-playbooks/ansible.cfg "web config" file to a file at location opt/ansible-web.cfg.
+		- Before running the ansible playbooks- you can specify the location of this configuration file "/opt/ansible-web.cfg" by an Environment Variable, ANSIBLE_CONFIG=/opt/ansible-web.cfg ansible-playbook playbook.yml

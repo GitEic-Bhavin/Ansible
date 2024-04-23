@@ -1,0 +1,73 @@
+﻿What is Handlers in Ansible ?
+
+Your web or app is hosting on your server.
+Servers have a hosting server like nginx, http , my-sql-server, rds-server etc.
+
+You need to update a content of your file on your server,
+You need to update a software or DB server on your server.
+You need to get notification by email by handler when handlers tasks is triggered.
+
+After update your software of content, you need to restart the DB-server, or nginx server.
+
+To perform/handle this type of things at each time by automatically, use HANDLERS.
+
+What tasks should be done by handlers ? It is defined by attribute is “ notify: ”.
+
+Hosts file
+web1 ansible_host=43.204.140.111 ansible_connection=ssh ansible_private_key=/root/.ssh/id_rsa ansible_user=ubuntu
+
+Inventory > Role > Tasks > playbook.yml , handler-playbook.yml , index.html , updated.html
+
+# This is role file. You can define role and handlers in one playbook.yml
+
+---
+- name: “Update apt cache and install Nginx”
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: index.html copy
+  template: src=index.html dest=/usr/share/nginx/html/index.html
+
+# Update the content on the website
+- name: updated.html copy
+  template: src=updated.html dest=/usr/share/nginx/html/index.html
+  notify:
+    - Restart Nginx
+
+
+
+
+
+# This is handlers file “ handler-playbook.yml”
+
+---
+- name: “Example ansible playbook for handers”
+  hosts: all
+  become: yes
+  remote_user: ubuntu
+  roles:
+    - handlers
+
+  handlers:
+    - name: Restart Nginx
+      service: name=nginx state=restarted
+
+
+# in “handlers: ” you have to write a proper name of tasks perform by handlers.
+# - name: Restart Nginx is a tasks name , it should be write in roles playbook.yml file as same syntax of tasks defined in handlers file.
+
+# handler ma tame Restart Nginx lakhelu chhe to tamare role file ma,
+    
+   notify:
+     - Restart Nginx 
+# aavu j lakhvu pade. That mean, notify will call handlers name = Restart Nginx in handlers playbook.yml
+
+Now, Run the playbook.yml
+
+ansible-playbook   -i  inventory  ansible-handler-playbook.yml
+
+  
+
+
