@@ -48,8 +48,6 @@ Example:- Boolean Variable
   hosts: all
   become: yes
   remote_user: ubuntu
-  roles:
-    - custom-role
 
   vars:
     # 2. Boolean Variable
