@@ -1,0 +1,8 @@
+---
+- name: Connect to EC2 instance
+  hosts: web_servers
+  gather_facts: no
+  tasks:
+    - name: SSH into EC2 instance
+      ansible.builtin.shell: echo "SSH connection successful"
+      become: false

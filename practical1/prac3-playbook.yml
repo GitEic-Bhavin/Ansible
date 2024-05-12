@@ -1,0 +1,12 @@
+# we have dictionary named employee. Add the remaining properties to it using information from the table below.
+
+# Key/Property Value
+
+# name	       john
+# gender       Male
+# age	       24
+
+employee:
+  name: john
+  gender: male
+  age: 24
