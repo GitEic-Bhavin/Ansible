@@ -1,0 +1,36 @@
+q-1 Which of the following Jinja2 expressions you will use along with the variable named user that generates the below output? Given that user=Tony.
+
+His name is Tony.
+
+A-1 His name is {{ user }}
+
+q-2 Which of the following Jinja2 expressions you will use to display the book_name in title case?
+
+{
+  "book_name": "Title of books are usually title cased"
+}
+
+A-2 {{ book_name | title }}
+
+Q-3 Which of the following Jinja2 expressions you will use to display the highest number in the given array?
+
+{
+  "numbers": [
+    13,
+    32,
+    53,
+    34,
+    25,
+    76,
+    17
+  ]
+}
+
+A-3 {{ numbers | max }}
+
+Q-4 There is a jinja2 template named /home/bob/playbooks/upper/templates/student.txt.j2 present on the student-node. 
+Update this template to display the value of student variable in UPPERCASE.
+
+The student name is {{ student }}
+
+A-4 The student name is {{ student | upper }}

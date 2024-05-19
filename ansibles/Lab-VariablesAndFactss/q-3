@@ -1,0 +1,2 @@
+Q-3 Which of the following formats is used to call a variable in an Ansible Playbook ?
+A-3 '{{ vairable_name }}'

@@ -1,0 +1,141 @@
+q-1 Which of the following Ansible modules support free_form parameter?
+A-1 command
+
+Q-2 Does Ansible support idempotancy?
+A-2 Yes
+
+Q-3 Which of the following commands we can use to see the information about Ansible modules from command line?
+A-3 ansible-doc
+
+A-4 Which Ansible module is used in the following playbook?
+
+---
+- hosts: localhost
+  become: yes
+  become_user: root
+  tasks:
+    - name: create user
+      user:
+        name: admin
+
+A-4 user
+
+Q-5 Which of the following statements are true about lineinfile Ansible module?
+
+
+A. It only adds the given line in file if that line doesn't exist in that file.
+
+
+B. It adds the given line in file even if that line already exists in that file.
+
+
+C. It replaces all existing lines in the file with a new given line.
+
+
+D. It keeps the existing lines as well and add a new given line in the file.
+
+A-5 D & A
+
+Q-6 What are Ansible system modules used for?
+
+
+A. System modules are basically used to create/update files and directories.
+
+
+B. System modules are actions to be performed at a system level such as modifying the users and groups on a system, modifying iptables, starting/stopping the service etc.
+
+
+C. System modules are used to execute commands or scripts on a system.
+
+
+D. System modules are used to install and setup packages on a system.
+
+A-6 B
+
+q-7 our organization uses a proprietary cloud service that is not natively supported by Ansible. You need to develop a custom Ansible module to interact with this cloud service's API and provision resources.
+
+
+Which type of the Ansible plugins allows you to integrate with a cloud provider's API for custom resource provisioning?
+
+
+a. Connection Plugin
+
+b. Lookup Plugin
+
+c. Module Plugin
+
+d. Action Plugin
+
+A-7 C
+
+Q-8 You've developed a custom module named custom_cloud. 
+To test this module in a playbook named deploy.yml, which of the following task definitions is correct? 
+
+A-8 
+- name: Provision custom cloud resource
+  custom_cloud:
+    param1: value1
+    param2: value2
+
+Q-9 You are tasked with setting up an Ansible playbook that automates the deployment of applications on AWS ec2 instances. 
+Before running the playbook, you need to ensure that Ansible has an up-to-date inventory of all ec2 instances in your AWS account.
+
+
+Which type of Ansible plugin would you use to fetch real-time information about your AWS ec2 instances?
+
+
+a. Lookup Plugin
+
+b. Filter Plugin
+
+c. Callback Plugin
+
+d. Dynamic Inventory Plugin  -- Right Ans
+
+Q-10 You have a custom dynamic inventory script named aws_inventory.py. 
+Which command would you use to list all hosts in your AWS inventory using this script?
+
+A-10 ansible-inventory --list -i aws_inventory.py
+
+Q-11 You are tasked with finding a collection in Ansible that provides modules specifically designed for managing Cisco IOS devices.
+Using the Modules & Plugins Index, which of the following collections is best suited for this purpose?
+
+A-11 cisco.ios
+
+Q-12 Which of the following is not a common connection parameter used by modules within the cisco.ios collection for managing Cisco IOS devices?
+A-12 ios_version
+
+Q-13 Which of the following Ansible versions is cisco.ios module likely to be compatible with?
+
+
+Note: This can be a hypothetical answer; the actual version compatibility would need to be checked in the Modules & Plugins Index.
+
+
+a. Ansible 1.5
+
+b. Ansible 2.8
+
+c. Ansible 3.1
+
+d. Ansible 4.0
+
+A-13 Ansible 2.8
+
+Q-14 You're planning to deploy an application on AWS and need to set up ec2 instances using Ansible. 
+Which module is primarily used for managing ec2 instances?
+
+
+a. aws_instance
+
+b. aws_ec2_config
+
+c. ec2_instance
+
+d. aws_setup
+
+A-14 ec2_instance
+
+
+
+
+

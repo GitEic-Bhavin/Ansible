@@ -1,0 +1,24 @@
+q-6 A sample playbook named update_service.yml is shown below, it is supposed to update a service on your servers.
+
+- hosts: all
+  tasks:
+    - name: Install a new package
+      apt:
+        name: new_package
+        state: present
+
+    - name: Update the service
+      service:
+        name: my_service
+        state: restarted
+
+    - name: Check service status
+      service:
+        name: my_service
+        state: started
+
+Which command would you use to run update_service.yml playbook in check mode?
+
+A-7 ansible-playbook -i inventory update_service.yml --check
+    ansible-playbook update_service.yml --check
+

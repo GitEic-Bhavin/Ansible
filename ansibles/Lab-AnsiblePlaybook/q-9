@@ -1,0 +1,17 @@
+q-9 Consider again the same sample playbook named configure_database.yml as shown below.
+
+- hosts: all
+  tasks:
+    - name: Set max connections
+      lineinfile:
+        path: /etc/postgresql/12/main/postgresql.conf
+        line: 'max_connections = 500'
+
+    - name: Set listen addresses
+      lineinfile:
+        path: /etc/postgresql/12/main/postgresql.conf
+        line: 'listen_addresses = "*"'
+
+To check the configure_database.yml playbook for syntax errors, which command would you use?
+
+A-9 ansible-playbook --syntax-check configure_database.yml

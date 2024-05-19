@@ -1,0 +1,14 @@
+Update the playbook /home/bob/playbooks/playbook.yaml to add a new task to create a new user called web_user.
+
+Use the user module for this task. 
+You can find the user details as below.
+
+Username: web_user
+uid: 1040
+group: developers
+
+
+playbook.yml
+
+- name: "create new user"
+    user: name=web_user uid=1040 group=developers state=present

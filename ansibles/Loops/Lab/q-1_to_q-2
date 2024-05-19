@@ -1,0 +1,7 @@
+q-1 Can loops be executed on dictionary values in Ansible?
+A-1 Yes
+
+q-2 Which type of plugin with_* directives use in Ansible?
+A-2 lookup plugin
+
+

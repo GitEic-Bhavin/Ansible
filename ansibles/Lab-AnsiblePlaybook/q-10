@@ -1,0 +1,36 @@
+q-10
+You've been given a playbook named database_setup.yml that is supposed to set up a PostgreSQL database on your servers. 
+Before deploying it, you want to ensure that it adheres to best practices and doesn't have any style-related issues.
+
+
+The initial sample playbook is as follows:
+
+- name: Database Setup Playbook
+  hosts: db_servers
+  tasks:
+    - name: Ensure PostgreSQL is installed
+      apt:
+        name: postgresql
+        state: latest
+        update_cache: yes
+
+    - name: Start PostgreSQL service
+      service:
+        name: postgresql
+        state: started
+
+    - copy:
+        src: /path/to/pg_hba.conf
+        dest: /etc/postgresql/12/main/pg_hba.conf
+      notify:
+        - Restart PostgreSQL
+
+Which command would you use to run ansible-lint on the database_setup.yml playbook?
+
+
+A. ansible database_setup.yml --lint
+B. ansible-lint database_setup.yml
+C. ansible-playbook database_setup.yml --lint
+D. lint-ansible database_setup.yml
+
+A-10 B. ansible-lint database_setup.yml

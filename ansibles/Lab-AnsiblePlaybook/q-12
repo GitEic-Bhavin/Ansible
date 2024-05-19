@@ -1,0 +1,21 @@
+q-12 You've been given feedback from ansible-lint about potential issues in your hypothetical webserver_setup.yml playbook. 
+The feedback mentions issues with indentation, deprecated modules, and missing name attributes.
+
+
+Which of the following is NOT a recommended action based on the feedback?
+
+
+A. Correcting the indentation in the playbook.
+B. Replacing deprecated modules with their newer counterparts.
+C. Ignoring the feedback and proceeding with playbook execution.
+D. Adding 'name' attributes to tasks that are missing them.
+
+
+A-12 C. Ignoring the feedback and proceeding with playbook executions.
+
+
+
+
+
+
+

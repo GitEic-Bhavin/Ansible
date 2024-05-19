@@ -1,0 +1,18 @@
+q-14 Update the name of the play in /home/bob/playbooks/playbook.yaml playbook to Execute a date command on localhost.
+
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date  
+
+Answer
+
+---
+- name: 'Execute a date command on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+     - name: 'Execute a date command'
+       command: date
