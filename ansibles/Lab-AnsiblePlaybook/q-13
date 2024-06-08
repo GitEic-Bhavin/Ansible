@@ -1,9 +1,0 @@
-q-13 If ansible-lint provides no output after checking a playbook, what does it indicate?
-
-
-A. The playbook has syntax errors.
-B. The playbook is empty.
-C. The playbook adheres to best practices and has no style-related issues.
-D. ansible-lint failed to check the playbook.
-
-A-13 C. The playbook adheres to best practices and has no style-related issues.

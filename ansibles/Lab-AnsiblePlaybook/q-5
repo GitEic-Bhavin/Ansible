@@ -1,2 +1,0 @@
-q-4 Which of the following commands can you use to run an Ansible playbook named install.yaml?
-a-4 ansible-playbook install.yaml
