@@ -1,0 +1,205 @@
+---
+# tasks file for postgresql
+- name: Install dependencies for PostgreSQL
+  apt: 
+    name: "{{ item }}" 
+    update_cache: true 
+    state: latest
+  with_items:
+    - bash
+    - openssl
+    - libssl-dev
+    - libssl-doc
+
+- name: Install PostgreSQL
+  apt: 
+    name: "{{ item }}" 
+    update_cache: true 
+    state: present
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - libpq-dev
+    - python3-psycopg2
+
+- name: Ensure the PostgreSQL service is running
+  service: 
+    name: postgresql 
+    state: started 
+    enabled: yes
+
+# - name: Create the database specified in vars
+#   become: true
+#   become_user: postgres 
+#   postgresql_db: 
+#     db: "{{ db_name }}"
+#     name: "{{ db_user }}" 
+#     owner: "{{ db_user }}"
+#     state: present
+
+- name: Create the database specified in vars
+  become: true
+  become_user: postgres
+  postgresql_db: 
+    name: "{{ db_name }}"
+    state: present
+
+- name: Ensure user has access to the new database
+  become: true
+  become_user: postgres
+  postgresql_user: 
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: ALL
+    state: present
+
+- name: Give access to ddsonar to database
+  become: true
+  become_user: postgres
+  postgresql_db: 
+    name: "{{ db_name }}"
+    owner: "{{ db_user }}"
+    state: present
+
+- name: Ensure user does not have unnecessary permissions
+  become: true
+  become_user: postgres
+  postgresql_user: 
+    name: "{{ db_user }}"
+    # owner: "{{ db_user }}"
+    role_attr_flags: NOSUPERUSER,NOCREATEDB
+    state: present
+
+
+
+
+# here
+# - name: Create database user ddsonar
+#   become: true
+#   become_user: postgres
+#   postgresql_user:
+#     name: "{{ db_user }}"
+#     password: "{{ db_password }}"
+#     role_attr_flags: "NOSUPERUSER,NOCREATEDB"
+#     # priv: ALL
+#     state: present
+
+# - name: Create database ddsonarqube with ownership assigned to ddsonar
+#   become: true
+#   become_user: postgres
+#   postgresql_db:
+#     db: "{{ db_name }}"
+#     owner: "{{ db_user }}"
+#     # priv: ALL
+#     state: present
+
+# - name: Ensure user does not have unnecessary permissions
+#   become: true
+#   become_user: postgres
+#   postgresql_privs: 
+#     db: "{{ db_name}}"
+#     roles: "{{ db_user }}"
+#     privs: ALL
+#     state: present
+# here
+
+# - name: Grant all privileges to ddsonar on the ddsonarqube database
+#   postgresql_privs:
+#     db: ddsonarqube
+#     role: ddsonar
+#     privs: ALL
+#     state: present
+
+
+
+
+# - name: Ensure user has access to the new database
+#   become: true
+#   become_user: postgres
+#   postgresql_user: 
+#     db: "{{ db_name }}"
+#     name: "{{ db_user }}"
+#     password: "{{ db_password }}"
+#     priv: ALL
+#     state: present
+
+# - name: Ensure user does not have unnecessary permissions
+#   become: true
+#   become_user: postgres
+#   postgresql_user: 
+#     name: "{{ db_user }}" 
+#     role_attr_flags: NOSUPERUSER,NOCREATEDB 
+#     state: present
+
+
+
+
+# name: Create postgresql repositroy on ubuntu
+#   become: true
+#   file:
+#     path: /etc/apt/sources.list.d/
+#     state: directory
+
+# - name: Add Postgresql repository
+#   become: True
+#   command: "sh -c 'echo \"deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main\" > /etc/apt/sources.list.d/pgdg.list'"
+
+# - name: add postgresql signing key on ubuntu
+#   apt_key:
+#     url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+#     state: present
+
+# - name: Install pip
+#   ansible.builtin.yum:
+#     name:
+#     - pip
+#     state: present
+
+
+# - name: Make sure psycopg2 is installed - needed for ansible postgresql stuff
+#   ansible.builtin.pip:
+#     name: psycopg2-binary==2.9.9
+#     state: present
+
+# - name: update packages
+#   become: true
+#   apt:
+#     update_cache: true
+#     force_apt_get: yes
+
+# - name: Install postgresql
+#   apt:
+#     name: postgresql-contrib
+#     state: present
+
+# - name: show version of postgresql
+#   command: psql --version
+#   register: result
+# - name: Show Psql version
+#   debug:
+#     var: result.stdout
+
+
+# - name: Start Postgresql service
+#   service:
+#     name: postgresql
+#     state: started
+#     enabled: yes
+
+# - name: Give permission to postgres for not asking for password
+#   lineinfile:
+#     dest: /etc/sudoers
+#     line: '{{ item }}'
+#   with_items:
+#     - 'postgres ALL=(ALL:ALL) ALL'
+
+# - name: Create the user ddsonar in postgress db
+#   postgresql_user:
+#     db: postgres
+#     name: ddsonar
+#     password: "mwd#2%#!!#%rgs"
+#     priv: "CONNECT/products:ALL"
+#     encrypted: True
+#     login_unix_socket: "/var/run/postgresql/.s.PGSQL.5432"
+    

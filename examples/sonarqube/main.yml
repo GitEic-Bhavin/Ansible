@@ -1,0 +1,8 @@
+---
+- name: install & run sonarqube on ubuntu
+  hosts: webservers
+  become: true
+  roles:
+   - open-jdk
+   - postgresql
+   - sonarqube    
