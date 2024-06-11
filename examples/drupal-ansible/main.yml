@@ -1,0 +1,14 @@
+---
+- name: install & run sonarqube on ubuntu
+  hosts: webserver
+  become: true
+  roles:
+    - apache2
+    - dependencies
+    - drupal
+  
+- name: Set up mysql for durpal
+  hosts: databaseserver
+  become: true
+  roles:
+    - mysql

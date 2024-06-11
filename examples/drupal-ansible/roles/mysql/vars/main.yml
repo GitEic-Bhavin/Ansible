@@ -1,0 +1,6 @@
+---
+# vars file for mysql
+mysql_root_password: bhavin
+mysql_db_name: drupal1
+mysql_user: drupal1
+mysql_user_password: drupal@1

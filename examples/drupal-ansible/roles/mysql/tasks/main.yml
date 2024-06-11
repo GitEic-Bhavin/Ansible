@@ -1,0 +1,114 @@
+---
+# tasks file for mysql
+
+- name: Install Python 3
+  become: true
+  package:
+    name: python3
+    state: present
+    update_cache: true
+
+- name: Install pip
+  apt:
+    name: python3-pip
+    update_cache: yes
+    state: present
+
+- name: install pymysql
+  become: true
+  pip:
+    name: pymysql
+    state: present
+
+- name: Install MySQL Database for Drupal
+  become: true
+  apt: 
+    name: "{{ item }}"
+    update_cache: true
+    state: present
+  with_items: 
+    - mysql-server
+  notify: 
+    - Enable mysql service
+    - Start mysql service
+
+- name: Set Root User & Root Password to Secure MySq
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: bhavin
+
+# login_user: & login_password: will perform for sudo mysql -u root -p , mysql> " your command".
+# To perform sudo mysql -u root -p we need to give database login password for local user root.
+
+
+- name: Remove Anonymous Users
+  mysql_user:
+    name: ""
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+# If You Disallow root user to Login Remotely & you performed this below tasks for same.
+# You will not be able to perform further tasks like remove test db, reload prev, creaet db user, password etc.
+
+# - name: Disallow Root Login Remotely
+#   mysql_user:
+#     name: root
+#     state: absent
+#     login_user: root
+#     login_password: "{{ mysql_root_password }}"
+
+
+
+- name: Ensure no user named 'db_user'@'localhost' exists, also passing in the auth credentials.
+  mysql_user:
+    name: drupal
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Create Database for drupal 
+  mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_host: webserver
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create MySQL user with password with access from any host (0.0.0.0)
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_user_password }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+# If you want to give all priv to your database only. use priv: "{{ your_db_name }}.*:ALL,GRANT"
+- name: Grant all privileges on all databases to a user from any host
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_user_password }}"
+    priv: '*.*:ALL,GRANT'
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+# create user 'drupal'@'%' identified by 'Bhavin@123';
+# grant all on *.* to 'drupal'@'%'' with grant option;
+
+- name: Allow MySQL Server to listen on all IPV4 to access user your database.
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysql.cnf
+    regexp: "bind-address            = 127.0.0.1"
+    line: "{{ item }}"
+  with_items: 
+    - 'bind-address            = 0.0.0.0'
+  notify: 
+    - Restart MySQL Service
+
